@@ -1,0 +1,38 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;   /* центр по вертикали */
+    align-items: center;       /* центр по горизонтали */
+    font-family: Arial, sans-serif;
+    background: #f5f7fa;
+}
+
+.welcome {
+    margin-bottom: 10px;
+    font-size: 32px;
+}
+
+.homework_text {
+    margin-bottom: 20px;
+    font-size: 18px;
+    color: #555;
+}
+
+.links {
+    display: block;
+    width: 250px;
+    text-align: center;
+    margin: 8px 0;
+    padding: 10px;
+    text-decoration: none;
+    color: white;
+    background: #4a90e2;
+    border-radius: 6px;
+    transition: 0.2s;
+}
+
+.links:hover {
+    background: #357abd;
+}

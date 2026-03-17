@@ -1,0 +1,17 @@
+{% load static %}
+<!DOCTYPE html>
+  <html lang="ru">
+  <head>
+      <meta charset="UTF-8">
+      <title>Главная</title>
+      <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  </head>
+  <body>
+    <h1 class="welcome">Добро пожаловать!</h1>
+    <h2 class="homework_text">Вот ссылки на страницы с ДЗ:</h2>
+    <a href="http://127.0.0.1:8000/api/books/23/" class="links">23-ая книга API</a>
+    <a href="http://127.0.0.1:8000/api/books/" class="links">Все книги API</a>
+    <a href="http://127.0.0.1:8000/books/" class="links">Все книги</a>
+    <a href="http://127.0.0.1:8000/books/23/" class="links">23-ая книга</a>
+  </body>
+</html>

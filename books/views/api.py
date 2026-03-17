@@ -1,9 +1,11 @@
+"""Модуль для view, которые отвечает за json ответы."""
 from books.crud.get_book import get_books, get_book
 
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpRequest, HttpResponseNotFound
 
 
-def json_all_books_view(request):
+def json_all_books_view(request: HttpRequest) -> JsonResponse:
+    """Возвращает все книги из БД в виде формата json."""
     books = get_books()
 
     books_list = []
@@ -22,11 +24,14 @@ def json_all_books_view(request):
 
     return JsonResponse(books_list, safe=False)
 
-def json_book_view(request, book_id:int):
+def json_book_view(request: HttpRequest, book_id:int) -> (
+        JsonResponse | HttpResponseNotFound
+):
+    """Возвращает книгу id из БД в виде формата json."""
     book = get_book(book_id=book_id)
 
     if not book:
-        return JsonResponse({})
+        return HttpResponseNotFound()
 
     return JsonResponse(
         {

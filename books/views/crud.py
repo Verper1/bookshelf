@@ -1,3 +1,4 @@
+"""Модуль для view, которые отвечает создание, удаление и обновление книги."""
 from django.http import (HttpRequest, HttpResponse, HttpResponseBadRequest,
                          JsonResponse,HttpResponseNotAllowed,
                          HttpResponseNotFound)
@@ -10,7 +11,8 @@ from books.crud.update_book import update_book
 
 
 @csrf_exempt
-def create_book_view(request: HttpRequest) -> HttpResponse:
+def create_book_view(request: HttpRequest) -> JsonResponse | HttpResponseBadRequest:
+    """Создаёт книгу в БД через POST запрос."""
     title = request.POST.get("title")
     author_full_name = request.POST.get("author_full_name")
     year_of_publishing = request.POST.get("year_of_publishing")
@@ -45,7 +47,10 @@ def create_book_view(request: HttpRequest) -> HttpResponse:
     )
 
 @csrf_exempt
-def delete_book_view(request: HttpRequest, book_id: int) -> HttpResponse:
+def delete_book_view(request: HttpRequest, book_id: int) -> (
+        HttpResponse | HttpResponseNotFound | HttpResponseNotAllowed
+):
+    """Удаление книги из БД по id через POST запрос."""
     if request.method != "POST":
         return HttpResponseNotAllowed(["POST"])
 
@@ -59,7 +64,10 @@ def delete_book_view(request: HttpRequest, book_id: int) -> HttpResponse:
     return HttpResponse()
 
 @csrf_exempt
-def update_book_view(request: HttpRequest, book_id: int) -> HttpResponse:
+def update_book_view(request: HttpRequest, book_id: int) -> (
+        HttpResponse | HttpResponseBadRequest | JsonResponse
+):
+    """Удаляет книгу из БД по id через POST запрос."""
     title = request.POST.get("title")
     author_full_name = request.POST.get("author_full_name")
     year_of_publishing = request.POST.get("year_of_publishing")

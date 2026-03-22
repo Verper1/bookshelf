@@ -2,7 +2,7 @@
 
 <span style="color: yellow;">**ОБНОВЛЕНО**</span> -> Все endpoint'ы можно открыть с главной страницы. 
 
-<span style="color: green;">**ТЕСТЫ**</span> -> Также, есть тесты на CRUD `python -m pytest -v`
+<span style="color: green;">**ТЕСТЫ**</span> -> Также, есть тесты на CRUDuv a `python -m pytest -v`
 
 В этом проекте у вас есть небольшой проект на Django с одной моделью (книга).
 

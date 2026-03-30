@@ -66,7 +66,7 @@ def test__json_all_books__mock_test(client: Client, mocker):
                       year_of_publishing=2010, copies_printed=5, short_description="Desc 2")
 
     # Патчим именно то, что view вызывает
-    mocker.patch('books.views.api.get_books', return_value=[book1, book2])
+    mocker.patch('books.views.get_books', return_value=[book1, book2])
 
     url = reverse('json_all_books')
     response = client.get(url)
@@ -88,7 +88,7 @@ def test__json_book__mock_test_book_exists(client: Client, mocker):
         short_description="Desc 1"
     )
 
-    mocker.patch('books.views.api.get_book', return_value=book)
+    mocker.patch('books.crud_db.get_book', return_value=book)
 
     url = reverse('json_book', kwargs={'book_id': 1})
     response = client.get(url)
@@ -100,7 +100,7 @@ def test__json_book__mock_test_book_exists(client: Client, mocker):
 
 
 def test__json_book__mock_test_book_does_not_exists(client: Client, mocker):
-    mocker.patch('books.views.api.get_book', return_value=None)
+    mocker.patch('books.crud_db.get_book', return_value=None)
 
     url = reverse('json_book', kwargs={'book_id': 999})
     response = client.get(url)

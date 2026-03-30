@@ -9,9 +9,9 @@
   <body>
     <h1 class="welcome">Добро пожаловать!</h1>
     <h2 class="homework_text">Вот ссылки на страницы с ДЗ:</h2>
-    <a href="http://127.0.0.1:8000/api/books/23/" class="links">23-ая книга API</a>
-    <a href="http://127.0.0.1:8000/api/books/" class="links">Все книги API</a>
-    <a href="http://127.0.0.1:8000/books/" class="links">Все книги</a>
-    <a href="http://127.0.0.1:8000/books/23/" class="links">23-ая книга</a>
+    <a href="{% url 'json_book' 23 %}" class="links">23-ая книга API</a>
+    <a href="{% url 'json_all_books' %}" class="links">Все книги API</a>
+    <a href="{% url 'all_books' %}" class="links">Все книги</a>
+    <a href="{% url 'book 23' %}" class="links">23-ая книга</a>
   </body>
 </html>

@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.test import Client
 
 @pytest.mark.django_db  # integration тест
-def test__create_book_integration_test(client: Client):
+def test__create_book__integration_test(client: Client):
     data = {
         'title': 'Test',
         'author_full_name': 'Author',
@@ -19,8 +19,8 @@ def test__create_book_integration_test(client: Client):
     assert response.status_code == 200
     assert Book.objects.count() == 1
 
-def test__create_book_mock_test(mocker, client: Client):  # mock тест
-    mock_create = mocker.patch('books.views.crud.create_book')
+def test__create_book__mock_test(mocker, client: Client):  # mock тест
+    mock_create = mocker.patch('books.views.create_book')
     mock_create.return_value.pk = 1
     mock_create.return_value.title = 'Test Book'
     mock_create.return_value.author_full_name = 'Author Full Name'

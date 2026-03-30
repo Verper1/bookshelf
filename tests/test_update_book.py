@@ -45,7 +45,7 @@ def test__update__mock_test_update_book(client, mocker):
     book.copies_printed = 10
     book.short_description = "New description"
 
-    mocker.patch('books.views.crud.update_book', return_value=book)
+    mocker.patch('books.views.update_book', return_value=book)
 
     url = reverse('update', kwargs={'book_id': 1})
 

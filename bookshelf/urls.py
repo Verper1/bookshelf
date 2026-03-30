@@ -1,11 +1,9 @@
 """Модуль для маршрутизации."""
 from django.contrib import admin
 from django.urls import path
-from books.views.pages import index_view, all_books_view, book_view
 
-from books.views.api import json_all_books_view, json_book_view
-
-from books.views.crud import create_book_view, update_book_view, \
+from books.views import index_view, all_books_view, book_view, \
+    json_all_books_view, json_book_view, create_book_view, update_book_view, \
     delete_book_view
 
 urlpatterns = [

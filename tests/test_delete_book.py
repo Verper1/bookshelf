@@ -31,8 +31,8 @@ def test__delete__integration_test_delete_book(client: Client):
 
 def test__delete__mock_test_delete_book(client: Client, mocker):
     fake_book = MagicMock()
-    mock_get = mocker.patch('books.views.crud.get_book', return_value=fake_book)
-    mock_delete = mocker.patch('books.views.crud.delete_book')
+    mock_get = mocker.patch('books.crud_db.get_book', return_value=fake_book)
+    mock_delete = mocker.patch('books.crud_db.delete_book')
 
     url = reverse('delete', kwargs={'book_id': 1})
     response = client.post(url)

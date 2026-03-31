@@ -19,6 +19,7 @@ def test__create_book__integration_test(client: Client):
     assert response.status_code == 200
     assert Book.objects.count() == 1
 
+@pytest.mark.django_db
 def test__create_book__mock_test(mocker, client: Client):  # mock тест
     mock_create = mocker.patch('books.views.create_book')
     mock_create.return_value.pk = 1

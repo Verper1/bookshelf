@@ -36,6 +36,7 @@ def test__update__integration_test_update_book(client):
     assert book.year_of_publishing == 2024
 
 
+@pytest.mark.django_db
 def test__update__mock_test_update_book(client, mocker):
     book = MagicMock()
     book.pk = 1
@@ -45,7 +46,8 @@ def test__update__mock_test_update_book(client, mocker):
     book.copies_printed = 10
     book.short_description = "New description"
 
-    mocker.patch('books.views.update_book', return_value=book)
+    mocker.patch('books.views.get_book', return_value=book)
+    mocker.patch('books.views.check_post_request', return_value=book)
 
     url = reverse('update', kwargs={'book_id': 1})
 

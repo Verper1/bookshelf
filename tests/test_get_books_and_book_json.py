@@ -59,6 +59,7 @@ def test__json_book__integration_test_book_does_not_exists(client: Client):
     assert response.status_code == 404
 
 
+@pytest.mark.django_db
 def test__json_all_books__mock_test(client: Client, mocker):
     book1 = MagicMock(pk=1, title="Book 1", author_full_name="Author 1",
                       year_of_publishing=2000, copies_printed=10, short_description="Desc 1")
@@ -78,6 +79,7 @@ def test__json_all_books__mock_test(client: Client, mocker):
     assert data[1]['title'] == "Book 2"
 
 
+@pytest.mark.django_db
 def test__json_book__mock_test_book_exists(client: Client, mocker):
     book = MagicMock(
         pk=1,
@@ -88,7 +90,7 @@ def test__json_book__mock_test_book_exists(client: Client, mocker):
         short_description="Desc 1"
     )
 
-    mocker.patch('books.crud_db.get_book', return_value=book)
+    mocker.patch('books.views.get_object_or_404', return_value=book)
 
     url = reverse('json_book', kwargs={'book_id': 1})
     response = client.get(url)
@@ -99,8 +101,10 @@ def test__json_book__mock_test_book_exists(client: Client, mocker):
     assert data['author_full_name'] == "Author 1"
 
 
+@pytest.mark.django_db
 def test__json_book__mock_test_book_does_not_exists(client: Client, mocker):
-    mocker.patch('books.crud_db.get_book', return_value=None)
+    from django.http import Http404
+    mocker.patch('books.views.get_object_or_404', side_effect=Http404)
 
     url = reverse('json_book', kwargs={'book_id': 999})
     response = client.get(url)

@@ -52,6 +52,7 @@ def test__book__integration_test_book_exists(client):
     assert "2000" in content
 
 
+@pytest.mark.django_db
 def test__all_books__mock_test(client, mocker):
     book1 = FakeBook(1, "Book 1", "Author 1", 2000, 10, "Desc 1")
     book2 = FakeBook(2, "Book 2", "Author 2", 2010, 5, "Desc 2")
@@ -67,6 +68,7 @@ def test__all_books__mock_test(client, mocker):
     assert "Book 2" in content
 
 
+@pytest.mark.django_db
 def test__book__mock_test_book_exists(client, mocker):
     book1 = FakeBook(
         1,
@@ -77,7 +79,7 @@ def test__book__mock_test_book_exists(client, mocker):
         "Desc 1"
     )
 
-    mocker.patch('books.crud_db.get_book', return_value=book1)
+    mocker.patch('books.views.get_object_or_404', return_value=book1)
 
     url = reverse('book', kwargs={'book_id': 1})
     response = client.get(url)
